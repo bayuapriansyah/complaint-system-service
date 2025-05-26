@@ -133,23 +133,41 @@ unset($_SESSION['loginError']);
                                 <i class=" fas fa-sign-in-alt me-2"></i>Login
                             </button>
 
+                            <div class="regist d-flex justify-content-between mt-3">
+                                <div class="remember">
+                                    <input type="checkbox" name="remember" id="checkbox">
+                                    <label for="checkbox"> ingat saya</label>
+                                </div>
+                                <div class="chooseregist">
+                                    <p>belum punya akun ?<a href="registrasiCust.php"> daftar</a></p>
+                                </div>
                         </form>
-                        <div class="regist d-flex justify-content-between mt-3">
-                            <div class="remember">
-                                <input type="checkbox" name="checkbox" id="checkbox">
-                                <label for="checkbox"> ingat saya</label>
-                            </div>
-                            <div class="chooseregist">
-                                <p>belum punya akun ?<a href="../Registrasi.php"> daftar</a></p>
-                            </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            if (localStorage.getItem('rememberMe') === 'true') {
+                document.getElementById('checkbox').checked = true;
+                document.getElementById('email').value = localStorage.getItem('rememberedEmail') || '';
+            }
+        });
+
+        document.getElementById('login').addEventListener('submit', function () {
+            if (document.getElementById('checkbox').checked) {
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('rememberedEmail', document.getElementById('email').value);
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('rememberedEmail');
+            }
+        });
+    </script>
     <?php if ($loginError): ?>
         <script>
             Swal.fire({

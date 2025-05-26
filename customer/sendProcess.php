@@ -14,7 +14,6 @@ $foto = $_POST['foto'];
 $sql = "INSERT INTO keluhan (nama, lokasi, deskripsi, foto, email) VALUES (?, ?, ?, ?, ?) ";
 $stmt = $conn->prepare($sql);
 
-
 if ($stmt) {
     $stmt->bind_param("sssss", $nama, $lokasi, $deskripsi, $foto, $email);
     if ($stmt->execute()) {

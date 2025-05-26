@@ -4,6 +4,11 @@ session_start();
 include "../koneksi.php";
 
 $email = $_POST['email'];
+if (isset($_POST['remember'])) {
+    setcookie('email', $_POST['email'], time() + (86400 * 30), "/"); // 30 hari
+} else {
+    setcookie('email', '', time() - 3600, "/");
+}
 
 $query = "SELECT email FROM customer WHERE email = '$email'";
 $result = mysqli_query($conn, $query);

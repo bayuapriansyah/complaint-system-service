@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../koneksi.php';
 
 session_start();
 $firstname = $_POST['firstName'] ?? '';
@@ -23,13 +23,12 @@ $checkQuery->close();
 $add = $conn->prepare("INSERT INTO customer (nama_depan, nama_belakang, email, no_hp, alamat, tanggal_lahir) VALUES (?,?,?,?,?,?)");
 $add->bind_param("ssssss", $firstname, $lastName, $email, $nohp, $alamat, $tanggallahir);
 if ($add->execute()) {
-    $_SESSION['success'] = "Berhasil menambahkan akun";
-    header("Location: dashboard.php");
+    $_SESSION['success'] = "Akun berhasil dibuat! Silahkan login";
+    header("Location: registrasiCust.php");
     exit();
 } else {
     $_SESSION['error'] = "Gagal membuat akun: " . $conn->error;
-    header("Location: dashboard.php");
-
+    header("Location: registrasiCust.php");
 }
 $add->close();
 $conn->close();

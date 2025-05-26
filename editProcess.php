@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'koneksi.php';
 
 $id = $_POST['id'];
@@ -10,7 +11,6 @@ $tanggallahir = $_POST['birthdate'];
 $alamat = $_POST['alamat'];
 
 
-
 $sql = "UPDATE customer SET 
 nama_depan = '$nama_depan',
 nama_belakang = '$nama_belakang', 
@@ -20,18 +20,12 @@ alamat = '$alamat',
 tanggal_lahir = '$tanggallahir' WHERE id = '$id'
 ";
 if ($conn->query($sql) === TRUE) {
-    echo "
-    <script>
-    alert('Data berhasil diubah');
-    window.location.href = 'dashboard.php';
-    </script>
-    ";
+    $_SESSION['success'] = "Data berhasil diubah!";
+    header('Location: dashboard.php');
+    exit();
 } else {
-    echo "
-    <script>
-    alert('Gagal mengubah data');
-    window.location.href = 'dashboard.php';
-    </script>
-    ";
+    $_SESSION['error'] = "Gagal mengubah data";
+    header('location: dashboard.php');
+    exit();
 }
 ?>

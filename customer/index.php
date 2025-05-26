@@ -44,7 +44,6 @@ $stmt->close();
         </div>
     </nav>
 
-
     <div class="container my-4">
         <div class="p-4 bg-light rounded shadow-sm">
             <h2 class="mb-3">Laporkan Keluhan Fasilitas</h2>
@@ -126,8 +125,7 @@ $stmt->close();
                 icon: 'success',
                 title: 'Berhasil',
                 text: '<?= $_SESSION['success'] ?>',
-                showConfirmButton: false,
-                timer: 1500
+                confirmButtonText: 'OK'
             });
         </script>
         <?php unset($_SESSION['success']); ?>
